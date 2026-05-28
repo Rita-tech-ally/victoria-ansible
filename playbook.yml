@@ -1,6 +1,5 @@
 - name: Deploy Victoria Metrics on EC2
-  hosts: tag_ubuntu_large   # Ye group ab automatically ban gaya
+  hosts: tag__ubuntu_large  # double underscore
   become: yes
-
   roles:
     - victoria_role
