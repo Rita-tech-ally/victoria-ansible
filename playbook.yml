@@ -1,6 +1,7 @@
 - name: Deploy Victoria Metrics on EC2
-  hosts: tag_dynamivc
+  hosts: tag_ubuntu
   become: yes
 
   roles:
     - victoria_role
+
