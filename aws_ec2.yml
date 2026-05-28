@@ -3,13 +3,11 @@ regions:
   - ap-south-1
 filters:
   instance-state-name: running
-hostnames:
-  - public-ip-address
-  - private-ip-address
-  - instance-id
+# Remove hostnames if it causes issues
 compose:
   ansible_host: public_ip_address
 keyed_groups:
   - key: tags.Name
     prefix: tag
-    separator: "_"      # single underscore instead of double
+    separator: "_"
+strict: False
