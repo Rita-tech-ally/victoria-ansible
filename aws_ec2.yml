@@ -1,8 +1,14 @@
-plugin: aws_ec2
+plugin: amazon.aws.aws_ec2
+
 regions:
   - ap-south-1
+
 filters:
-  tag:Environment: prod   # sirf prod tag wale instances fetch honge
+  instance-state-name: running
+
+hostnames:
+  - ip-address
+
 keyed_groups:
   - key: tags.Name
-    prefix: instance
+    prefix: tag
