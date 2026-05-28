@@ -1,0 +1,5 @@
+SLACK_CHANNEL_NAME: "all-ritadogra"
+ENVIRONMENT: "prod"
+CODE_BASE_PATH: "."
+ACTION_MESSAGE: "VictoriaMetrics Deployment Successful"
+KEEP_APPROVAL_STAGE: "true"
