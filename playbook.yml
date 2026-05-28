@@ -1,5 +1,5 @@
 - name: Deploy Victoria Metrics on EC2
-  hosts: all
+  hosts: aws_ec2
   become: yes
 
   roles:
