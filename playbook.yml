@@ -1,5 +1,5 @@
 - name: Deploy Victoria Metrics on EC2
-  hosts: tag_ubuntu_large    # yeh group aws_ec2.yml ke tag se banta hai
+  hosts: tag_ubuntu_large   # Ye group ab automatically ban gaya
   become: yes
 
   roles:
