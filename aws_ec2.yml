@@ -7,4 +7,9 @@ filters:
   instance-state-name: running
 
 hostnames:
-  - public_ip_address
+  - public_ip_address   # <-- previously you had "ip-address", must be this
+
+# Optional: group instances by tags
+keyed_groups:
+  - key: tags.Name
+    prefix: tag
