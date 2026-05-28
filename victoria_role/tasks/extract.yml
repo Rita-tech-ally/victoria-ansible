@@ -1,0 +1,23 @@
+---
+- name: Create temp extract directory
+  file:
+    path: /tmp/vm_extract
+    state: directory
+
+- name: Extract VictoriaMetrics tar
+  unarchive:
+    src: /tmp/vm.tar.gz
+    dest: /tmp/vm_extract
+    remote_src: yes
+
+- name: Move binary to install directory
+  copy:
+    src: /tmp/vm_extract/victoria-metrics-prod
+    dest: "{{ vm_install_dir }}/victoria-metrics-prod"
+    mode: "0755"
+    remote_src: yes
+
+- name: Clean temp files
+  file:
+    path: /tmp/vm_extract
+    state: absent

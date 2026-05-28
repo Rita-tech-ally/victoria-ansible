@@ -1,0 +1,9 @@
+---
+# vars file for victoia_role
+vm_packages:
+  Debian:
+    - wget
+    - tar
+  RedHat:
+    - wget
+    - tar

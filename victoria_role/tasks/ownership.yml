@@ -1,0 +1,8 @@
+---
+- name: Fix ownership for VictoriaMetrics directory
+  become: yes
+  file:
+    path: "{{ vm_install_dir }}"
+    owner: "{{ vm_user }}"
+    group: "{{ vm_user }}"
+    recurse: yes

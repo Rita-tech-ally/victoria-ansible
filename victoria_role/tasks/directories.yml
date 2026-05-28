@@ -1,0 +1,9 @@
+---
+- name: Create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ vm_user }}"
+  loop:
+    - "{{ vm_install_dir }}"
+    - "{{ vm_data_dir }}"

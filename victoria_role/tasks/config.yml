@@ -1,0 +1,6 @@
+---
+- name: Deploy config file
+  template:
+    src: vm.yaml.j2
+    dest: "{{ vm_install_dir }}/vm.yaml"
+  notify: restart vm

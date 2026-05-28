@@ -1,0 +1,14 @@
+[Unit]
+Description=VictoriaMetrics Service
+After=network.target
+
+[Service]
+User={{ vm_user }}
+ExecStart={{ vm_install_dir }}/victoria-metrics-prod \
+  -storageDataPath={{ vm_data_dir }} \
+  -httpListenAddr=:{{ vm_port }}
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

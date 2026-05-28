@@ -1,0 +1,26 @@
+---
+- name: Install dependencies on Ubuntu
+  apt:
+    name:
+      - wget
+      - curl
+      - tar
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: Install dependencies on RedHat
+  yum:
+    name:
+      - wget
+      - curl
+      - tar
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Create vm user
+  user:
+    name: "{{ vm_user }}"
+    shell: /bin/false
+    system: yes
+

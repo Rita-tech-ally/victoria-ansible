@@ -1,0 +1,12 @@
+---
+# handlers file for victoia_role
+
+- name: restart vm
+  systemd:
+    name: victoriametrics
+    state: restarted
+    daemon_reload: yes
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes

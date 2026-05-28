@@ -1,0 +1,5 @@
+---
+- name: Create system user
+  user:
+    name: "{{ vm_user }}"
+    system: yes

@@ -1,0 +1,5 @@
+---
+- name: Install required packages
+  package:
+    name: "{{ vm_packages[ansible_os_family] }}"
+    state: present

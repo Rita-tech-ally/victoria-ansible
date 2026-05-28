@@ -1,0 +1,11 @@
+---
+# tasks file for victoia_role
+- import_tasks: install_packages.yml
+- import_tasks: user.yml
+- import_tasks: directories.yml
+- import_tasks: download.yml
+- import_tasks: extract.yml
+- import_tasks: config.yml
+- import_tasks: systemd.yml
+- import_tasks: ownership.yml
+- import_tasks: os_dependence.yml 
