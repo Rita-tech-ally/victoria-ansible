@@ -1,7 +1,6 @@
 - name: Deploy Victoria Metrics on EC2
-  hosts: tag_ubuntu
+  hosts: all
   become: yes
 
   roles:
     - victoria_role
-
