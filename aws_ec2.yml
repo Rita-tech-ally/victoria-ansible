@@ -10,3 +10,4 @@ compose:
 keyed_groups:
   - key: tags.Name
     prefix: tag
+    separator: "_"      # single underscore instead of double
