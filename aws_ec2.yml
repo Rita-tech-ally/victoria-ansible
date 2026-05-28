@@ -1,5 +1,5 @@
-plugin: amazon.aws.aws_ec2
 
+plugin: amazon.aws.aws_ec2
 regions:
   - ap-south-1
 
@@ -7,7 +7,7 @@ filters:
   instance-state-name: running
 
 hostnames:
-  - public-ip-address
+  - public_ip_address
 
 compose:
   ansible_host: public_ip_address
@@ -15,4 +15,3 @@ compose:
 keyed_groups:
   - key: tags.Name
     prefix: tag_
-    separator: ""
