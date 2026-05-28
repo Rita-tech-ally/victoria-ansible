@@ -4,7 +4,7 @@ regions:
 filters:
   instance-state-name: running
 hostnames:
-  - public_ip_address   # must match what you connect via (public/private)
+  - public_ip_address
 compose:
   ansible_host: public_ip_address
 keyed_groups:
