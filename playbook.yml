@@ -1,5 +1,6 @@
 - name: Deploy Victoria Metrics on EC2
-  hosts: tag__ubuntu_large  # double underscore
+  hosts: tag__ubuntu_large
   become: yes
+
   roles:
     - victoria_role
