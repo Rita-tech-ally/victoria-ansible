@@ -1,20 +1,14 @@
 ---
 galaxy_info:
-  author: Ritu
-  description: Install and configure VictoriaMetrics
-  license: MIT
-  min_ansible_version: "2.9"
+  author: Ritu Dogra
+  description: Ansible role for OT-Microservices stack with Nginx Reverse Proxy
+  company: MyGurukulam
+  license: Apache-2.0
+  min_ansible_version: "2.12"
   platforms:
     - name: Ubuntu
       versions:
         - focal
         - jammy
-    - name: EL
-      versions:
-        - 8
-        - 9
-  galaxy_tags:
-    - monitoring
-    - victoriametrics
 
 dependencies: []
