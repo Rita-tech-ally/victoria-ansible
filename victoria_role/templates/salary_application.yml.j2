@@ -1,0 +1,17 @@
+# Ansible Managed
+server:
+  port: {{ salary_api_port }}
+
+spring:
+  cassandra:
+    keyspace-name: {{ scylla_keyspace }}
+    contact-points: {{ scylla_host }}
+    port: {{ scylla_port }}
+    username: {{ scylla_user }}
+    password: {{ scylla_password }}
+    local-datacenter: datacenter1
+  data:
+    redis:
+      host: {{ redis_host }}
+      port: {{ redis_port }}
+      password: {{ redis_password }}
