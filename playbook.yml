@@ -1,6 +1,31 @@
-- name: Deploy Victoria Metrics on EC2
-  hosts: tag__ubuntu_large
-  become: yes
+---
+- name: Deploy and Configure OT-Microservices Stack
+  hosts: tag_Name_ot_microservices:&instance_state_running # Dynamic inventory group matching
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+    - name: Verify Python and required system tools exist
+      ansible.builtin.raw: test -e /usr/bin/python3 || (apt-get update && apt-get install -y python3)
+      changed_when: false
+
+    - name: Gather facts after python verification
+      ansible.builtin.setup:
 
   roles:
-    - victoria_role
+    - role: ot_microservices
+
+  post_tasks:
+    - name: Validate Nginx reverse proxy endpoint response
+      ansible.builtin.uri:
+        url: "http://127.0.0.1:{{ nginx_port | default(80) }}"
+        status_code: [200, 301, 302]
+        timeout: 5
+      register: frontend_health
+      retries: 3
+      delay: 5
+      until: frontend_health.status in [200, 301, 302]
+
+    - name: Log deployment status
+      ansible.builtin.debug:
+        msg: "OT-Microservices stack successfully deployed and verified on {{ inventory_hostname }}."
