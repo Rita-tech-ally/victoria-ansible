@@ -1,0 +1,13 @@
+---
+# Ansible Managed
+postgres:
+  database: "{{ postgres_db }}"
+  host: "{{ postgres_host }}"
+  port: {{ postgres_port }}
+  user: "{{ postgres_user }}"
+  password: "{{ postgres_password }}"
+
+redis:
+  host: "{{ redis_host }}"
+  port: {{ redis_port }}
+  password: "{{ redis_password }}"
