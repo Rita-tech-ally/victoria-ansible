@@ -1,12 +1,32 @@
 ---
-# handlers file for victoia_role
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: true
 
-- name: restart vm
-  systemd:
-    name: victoriametrics
+- name: Test nginx configuration
+  ansible.builtin.command:
+    cmd: nginx -t
+  changed_when: false
+
+- name: Reload nginx
+  ansible.builtin.systemd:
+    name: "{{ nginx_service_name }}"
+    state: reloaded
+
+- name: Restart employee-api
+  ansible.builtin.systemd:
+    name: employee-api
     state: restarted
-    daemon_reload: yes
+    daemon_reload: true
 
-- name: reload systemd
-  systemd:
-    daemon_reload: yes
+- name: Restart salary-api
+  ansible.builtin.systemd:
+    name: salary-api
+    state: restarted
+    daemon_reload: true
+
+- name: Restart attendance-api
+  ansible.builtin.systemd:
+    name: attendance-api
+    state: restarted
+    daemon_reload: true
