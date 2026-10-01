@@ -1,9 +1,7 @@
 ---
-# vars file for victoia_role
-vm_packages:
-  Debian:
-    - wget
-    - tar
-  RedHat:
-    - wget
-    - tar
+# OS and Static Package constants
+nginx_package_name: "nginx"
+nginx_config_dir: "/etc/nginx/conf.d"
+nginx_service_name: "nginx"
+
+systemd_dir: "/etc/systemd/system"
