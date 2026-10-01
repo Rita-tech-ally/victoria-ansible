@@ -1,0 +1,19 @@
+---
+- name: Include prerequisites setup
+  ansible.builtin.include_tasks: prerequisites.yml
+
+- name: Include employee-api deployment tasks
+  ansible.builtin.include_tasks: employee_api.yml
+  when: enable_employee_api | bool
+
+- name: Include salary-api deployment tasks
+  ansible.builtin.include_tasks: salary_api.yml
+  when: enable_salary_api | bool
+
+- name: Include attendance-api deployment tasks
+  ansible.builtin.include_tasks: attendance_api.yml
+  when: enable_attendance_api | bool
+
+- name: Include frontend and Nginx setup tasks
+  ansible.builtin.include_tasks: frontend.yml
+  when: enable_frontend | bool
