@@ -1,0 +1,31 @@
+---
+- name: Deploy Attendance API configuration
+  ansible.builtin.template:
+    src: attendance_config.yaml.j2
+    dest: "{{ app_base_dir }}/attendance-api/config.yaml"
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: "0640"
+  notify: Restart attendance-api
+
+- name: Create systemd unit for attendance-api
+  ansible.builtin.copy:
+    dest: "{{ systemd_dir }}/attendance-api.service"
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=OT Attendance API Service
+      After=network.target
+
+      [Service]
+      Type=simple
+      User={{ app_user }}
+      WorkingDirectory={{ app_base_dir }}/attendance-api
+      ExecStart=/usr/local/bin/gunicorn app:app --log-config log.conf -b 0.0.0.0:{{ attendance_api_port }}
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+  notify: Restart attendance-api
