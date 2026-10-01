@@ -1,0 +1,31 @@
+---
+- name: Deploy Salary API application configuration
+  ansible.builtin.template:
+    src: salary_application.yml.j2
+    dest: "{{ app_base_dir }}/salary-api/application.yml"
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: "0640"
+  notify: Restart salary-api
+
+- name: Create systemd unit for salary-api
+  ansible.builtin.copy:
+    dest: "{{ systemd_dir }}/salary-api.service"
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=OT Salary API Service
+      After=network.target
+
+      [Service]
+      Type=simple
+      User={{ app_user }}
+      WorkingDirectory={{ app_base_dir }}/salary-api
+      ExecStart=/usr/bin/java -jar {{ app_base_dir }}/salary-api/salary-0.1.0-RELEASE.jar --server.port={{ salary_api_port }}
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+  notify: Restart salary-api
