@@ -1,0 +1,31 @@
+---
+- name: Deploy Employee API configuration
+  ansible.builtin.template:
+    src: employee_config.yaml.j2
+    dest: "{{ app_base_dir }}/employee-api/config.yaml"
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: "0640"
+  notify: Restart employee-api
+
+- name: Create systemd unit for employee-api
+  ansible.builtin.copy:
+    dest: "{{ systemd_dir }}/employee-api.service"
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=OT Employee API Service
+      After=network.target
+
+      [Service]
+      Type=simple
+      User={{ app_user }}
+      WorkingDirectory={{ app_base_dir }}/employee-api
+      ExecStart={{ app_base_dir }}/employee-api/employee-api
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+  notify: Restart employee-api
