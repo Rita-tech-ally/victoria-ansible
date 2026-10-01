@@ -1,0 +1,36 @@
+---
+- name: Install Nginx package
+  ansible.builtin.package:
+    name: "{{ nginx_package_name }}"
+    state: present
+
+- name: Ensure frontend build directory exists
+  ansible.builtin.file:
+    path: "{{ frontend_build_path }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: "0755"
+
+- name: Deploy Nginx reverse proxy configuration
+  ansible.builtin.template:
+    src: nginx_ot_frontend.conf.j2
+    dest: "{{ nginx_config_dir }}/ot_microservices.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Test nginx configuration
+    - Reload nginx
+
+- name: Remove default Nginx site configuration
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Reload nginx
+
+- name: Ensure Nginx service is enabled and started
+  ansible.builtin.systemd:
+    name: "{{ nginx_service_name }}"
+    state: started
+    enabled: true
